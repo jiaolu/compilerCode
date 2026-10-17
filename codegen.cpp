@@ -5,7 +5,7 @@
 std::unique_ptr<AsmOperand> convertExp(const ASTNode* astNode) {
     if (auto constExp = dynamic_cast<const ConstantExp*>(astNode)) {
         unsigned value = std::stoul(constExp->value);
-        return std::move(std::make_unique<AsmImmediate>(value));
+        return std::make_unique<AsmImmediate>(value);
     }
     return nullptr;
 }
@@ -14,11 +14,9 @@ void convertInstruction(const ASTNode* astNode, std::vector<std::unique_ptr<AsmI
     if (auto returnStm = dynamic_cast<const ReturnStm*>(astNode)) {
         auto exp = convertExp(returnStm->exp.get());
         if (exp) {
-            auto asmMov = std::make_unique<AsmMov>(std::move(exp), std::make_unique<AsmRegister>());
-            instructions.push_back(std::move(asmMov));
+            instructions.push_back(std::make_unique<AsmMov>(std::move(exp), std::make_unique<AsmRegister>()));
         }
-        auto asmRet = std::make_unique<AsmRet>();
-        instructions.push_back(std::move(asmRet));
+        instructions.push_back(std::make_unique<AsmRet>());
     }
 }
 
@@ -30,17 +28,17 @@ std::unique_ptr<AsmFunc> convertFunc(const ASTNode* astNode) {
             convertInstruction(statement.get(), asmFunc->instructions);
         }
     }
-    return std::move(asmFunc);
+    return asmFunc;
 }
 
 std::unique_ptr<AsmPrg> convertProg(const ASTNode* astNode) {
     auto asmProgram = std::make_unique<AsmPrg>();
     if (auto progNode = dynamic_cast<const ProgNode*>(astNode)) {
            const ASTNode* funcNode = progNode->children[0].get();
-           asmProgram->func  = std::move(convertFunc(funcNode));
+            asmProgram->func = convertFunc(funcNode);
 
     }
-    return std::move(asmProgram);
+        return asmProgram;
 }
 
 

@@ -16,7 +16,7 @@ std::unique_ptr<Expression> parse_expression(unsigned depth, unsigned& index, co
     // For now, just return a nullptr to indicate that this is not implemented
     expect(TokenType::Constant, index, tokens); // Expecting a constant
     auto exprNode = std::make_unique<ConstantExp>(identifierMap.at(index - 1).c_str(), depth);
-    return std::move(exprNode);
+    return exprNode;
 }
 
 std::unique_ptr<Statement> parse_statement(unsigned depth, unsigned& index, const std::vector<TokenType>& tokens, const std::map<unsigned, std::string>& identifierMap) {
@@ -28,7 +28,7 @@ std::unique_ptr<Statement> parse_statement(unsigned depth, unsigned& index, cons
     expect(TokenType::SEMICOLON, index, tokens); // Expecting ';'
     auto funcNode = std::make_unique<ReturnStm>(depth);
     funcNode->addChild(std::move(exp));
-    return std::move(funcNode);
+    return funcNode;
 }
 
 std::unique_ptr<ASTNode> parse_function(unsigned depth,unsigned& index, const std::vector<TokenType>& tokens, const std::map<unsigned, std::string>& identifierMap) {
@@ -43,7 +43,7 @@ std::unique_ptr<ASTNode> parse_function(unsigned depth,unsigned& index, const st
     auto statement = parse_statement(depth + 1, index, tokens, identifierMap); // Parse the function body (statements)
     funcNode->addChild(std::move(statement));
     expect(TokenType::CloseBrace, index, tokens); // Expecting '}'
-    return std::move(funcNode);
+    return funcNode;
 }
 
 std::unique_ptr<ASTNode> parse_program(const std::vector<TokenType>& tokens, const std::map<unsigned, std::string>& identifierMap) {
@@ -62,7 +62,7 @@ std::unique_ptr<ASTNode> parse_program(const std::vector<TokenType>& tokens, con
             exit(1);
         }
     }
-    return std::move(progNode);
+    return progNode;
 }
 
 
