@@ -3,17 +3,17 @@
 #include <regex>
 
 enum TokenType : unsigned {
-    Int = 0,
-    Void ,
-    Return ,
-    OpenParenthesis,
-    CloseParenthesis,
-    OpenBrace,
-    CloseBrace,
-    SEMICOLON,
-    Constant ,
-    Identifier,
-    COUNT
+  Int = 0,
+  Void,
+  Return,
+  OpenParenthesis,
+  CloseParenthesis,
+  OpenBrace,
+  CloseBrace,
+  SEMICOLON,
+  Constant,
+  Identifier,
+  COUNT
 };
 
 #endif
