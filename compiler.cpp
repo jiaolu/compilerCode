@@ -15,6 +15,10 @@ int main(int argc, char *argv[]) {
   if (argc == 2) {
     const std::string inputFilename = argv[1];
     std::ifstream inputFile(inputFilename);
+    if (inputFile.is_open()) {
+      std::cerr << "Error opening file: " << inputFilename << std::endl;
+      return 1;
+    }
     auto fileExtension = inputFilename.rfind('.', inputFilename.length() - 1);
     auto fileNameWithoutExtension = inputFilename.substr(0, fileExtension);
     std::string outputFilename = fileNameWithoutExtension + ".s";

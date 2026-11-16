@@ -4,6 +4,9 @@
 
 enum TokenType : unsigned {
   Int = 0,
+  TwoHyphen,
+  Hyphen,
+  Tilde,
   Void,
   Return,
   OpenParenthesis,

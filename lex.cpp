@@ -2,17 +2,25 @@
 #include <iostream>
 #include <vector>
 
-std::regex regexPatterns[] = {
-    std::regex(R"(int\b)"),    std::regex(R"(void\b)"),
-    std::regex(R"(return\b)"), std::regex(R"(\()"),
-    std::regex(R"(\))"),       std::regex(R"(\{)"),
-    std::regex(R"(\})"),       std::regex(R"(;)"),
-    std::regex(R"(\d+\b)"),    std::regex(R"([a-zA-Z_]\w*\b)")};
+std::regex regexPatterns[] = {std::regex(R"(int\b)"),
+                              std::regex(R"(--\b)"),
+                              std::regex(R"(-)"),
+                              std::regex(R"(~)"),
+                              std::regex(R"(void\b)"),
+                              std::regex(R"(return\b)"),
+                              std::regex(R"(\()"),
+                              std::regex(R"(\))"),
+                              std::regex(R"(\{)"),
+                              std::regex(R"(\})"),
+                              std::regex(R"(;)"),
+                              std::regex(R"(\d+\b)"),
+                              std::regex(R"([a-zA-Z_]\w*\b)")};
 
 const char *TokenTypeStrings[] = {
-    "int keyword",       "void keyword", "return keyword", "Open Parenthesis",
-    "Close Parenthesis", "Open Brace",   "Close Brace",    "Semicolon",
-    "Constant",          "Identifier",
+    "int keyword",  "TwoHyphen",      "Hyphen",           "Tilde",
+    "void keyword", "return keyword", "Open Parenthesis", "Close Parenthesis",
+    "Open Brace",   "Close Brace",    "Semicolon",        "Constant",
+    "Identifier",
 };
 
 static_assert(
